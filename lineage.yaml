@@ -1,0 +1,8 @@
+payload:
+  # > Lineage 韩服天堂
+  - DOMAIN-SUFFIX,plaync.com
+  - DOMAIN-SUFFIX,plaync.net
+  - IP-CIDR,52.162.0.0/16
+  - IP-CIDR,54.180.0.0/16
+  - IP-CIDR,112.175.0.0/16
+  - IP-CIDR,172.217.0.0/16
