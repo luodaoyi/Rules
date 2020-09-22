@@ -1,0 +1,773 @@
+
+## 订阅 https://dler.cloud/subscribe/{managed_token}?clash=ss&emoji=0
+
+####################
+### 自定义设置 ####
+####################
+custom_setting:
+  - &time_test 300  # 节点延迟测试的间隔（秒）
+  - &time_update 86400  # 节点订阅更新的间隔（秒）
+  - &time_auto_select 3600 #节点自动选择检测时间(秒)
+  - &time_update_rule 86400  # 规则更新的间隔（秒）
+  - &test_url "http://www.gstatic.com/generate_204"  # 延迟测试链接 # http://www.gstatic.com/generate_204 或 https://cp.cloudflare.com
+  
+  port: 7890
+  socks-port: 7891
+  mixed-port: 8899
+  allow-lan: true
+  #bind-address: "192.168.5.1"
+  ipv6: false
+  mode: rule
+  log-level: silent
+  # external-controller: 192.168.5.1:9090
+  # experimental:
+  ignore-resolve-fail: true
+  # clash-for-android:
+  # ui-subtitle-pattern: '[一-龥]{2,4}'
+  redir-port: 7892
+  secret: "123456"
+  #external-ui: "/usr/share/openclash/dashboard"
+  dns:
+    enable: true
+    ipv6: false
+    enhanced-mode: fake-ip
+    fake-ip-range: 198.18.0.1/16
+    listen: 127.0.0.1:7874
+    fake-ip-filter:
+  ##Custom fake-ip-filter##
+    - '*.lan'
+    - 'time.windows.com'
+    - 'time.nist.gov'
+    - 'time.apple.com'
+    - 'time.asia.apple.com'
+    - '*.ntp.org.cn'
+    - '*.openwrt.pool.ntp.org'
+    - 'time1.cloud.tencent.com'
+    - 'time.ustc.edu.cn'
+    - 'pool.ntp.org'
+    - 'ntp.ubuntu.com'
+    - 'ntp.aliyun.com'
+    - 'ntp1.aliyun.com'
+    - 'ntp2.aliyun.com'
+    - 'ntp3.aliyun.com'
+    - 'ntp4.aliyun.com'
+    - 'ntp5.aliyun.com'
+    - 'ntp6.aliyun.com'
+    - 'ntp7.aliyun.com'
+    - 'time1.aliyun.com'
+    - 'time2.aliyun.com'
+    - 'time3.aliyun.com'
+    - 'time4.aliyun.com'
+    - 'time5.aliyun.com'
+    - 'time6.aliyun.com'
+    - 'time7.aliyun.com'
+    - '*.time.edu.cn'
+    - 'time1.apple.com'
+    - 'time2.apple.com'
+    - 'time3.apple.com'
+    - 'time4.apple.com'
+    - 'time5.apple.com'
+    - 'time6.apple.com'
+    - 'time7.apple.com'
+    - 'time1.google.com'
+    - 'time2.google.com'
+    - 'time3.google.com'
+    - 'time4.google.com'
+    - 'music.163.com'
+    - '*.music.163.com'
+    - '*.126.net'
+    - 'musicapi.taihe.com'
+    - 'music.taihe.com'
+    - 'songsearch.kugou.com'
+    - 'trackercdn.kugou.com'
+    - '*.kuwo.cn'
+    - 'api-jooxtt.sanook.com'
+    - 'api.joox.com'
+    - 'joox.com'
+    - 'y.qq.com'
+    - '*.y.qq.com'
+    - 'streamoc.music.tc.qq.com'
+    - 'mobileoc.music.tc.qq.com'
+    - 'isure.stream.qqmusic.qq.com'
+    - 'dl.stream.qqmusic.qq.com'
+    - 'aqqmusic.tc.qq.com'
+    - 'amobile.music.tc.qq.com'
+    - '*.xiami.com'
+    - '*.music.migu.cn'
+    - 'music.migu.cn'
+    - '*.msftconnecttest.com'
+    - '*.msftncsi.com'
+    - 'localhost.ptlogin2.qq.com'
+    - '*.*.*.srv.nintendo.net'
+    - '*.*.stun.playstation.net'
+    - 'xbox.*.*.microsoft.com'
+    - '*.*.xboxlive.com'
+    - 'proxy.golang.org'
+  ##Custom fake-ip-filter END##
+  ##Custom DNS##
+    nameserver:
+    - 114.114.114.114
+    - 119.29.29.29
+    - 119.28.28.28
+    - 223.5.5.5
+    - https://doh.rixcloud.dev/dns-query
+    fallback:
+    - https://cloudflare-dns.com/dns-query
+    - https://dns.google/dns-query
+    - tls://dns.google:853
+    - https://1.1.1.1/dns-query
+    - tls://1.1.1.1:853
+    - tls://8.8.8.8:853
+    fallback-filter:
+      geoip: true
+      ipcidr:
+        - 0.0.0.0/8
+        - 10.0.0.0/8
+        - 100.64.0.0/10
+        - 127.0.0.0/8
+        - 169.254.0.0/16
+        - 172.16.0.0/12
+        - 192.0.0.0/24
+        - 192.0.2.0/24
+        - 192.88.99.0/24
+        - 192.168.0.0/16
+        - 198.18.0.0/15
+        - 198.51.100.0/24
+        - 203.0.113.0/24
+        - 224.0.0.0/4
+        - 240.0.0.0/4
+        - 255.255.255.255/32
+  #===================== OpenClash-General-Settings =====================#
+  
+  # 机场订阅分组
+  proxy-providers:
+    HK:
+      type: http
+      path: ./hk.yaml
+      url: https://dler.cloud/subscribe/{managed_token}?protocols=ss&list=clash&area=hk&emoji=0
+      interval: *time_update  # 订阅更新间隔（秒）
+      health-check:
+        enable: true
+        url: *test_url
+        interval: *time_test  # 测试间隔
+    KR:
+      type: http
+      path: ./kr.yaml
+      url: https://dler.cloud/subscribe/{managed_token}?protocols=ss&list=clash&area=kr&emoji=0
+      interval: *time_update
+      health-check:
+        enable: true
+        url: *test_url
+        interval: *time_test
+    UN:
+      type: http
+      path: ./un.yaml
+      url: https://dler.cloud/subscribe/{managed_token}?protocols=ss&list=clash&emoji=0
+      interval: *time_update
+      health-check:
+        enable: true
+        url: *test_url
+        interval: *time_test
+    Game:
+      type: http
+      path: ./Game.yaml
+      url: https://dler.cloud/subscribe/{managed_token}?protocols=ss&list=clash&type=gamer&emoji=0
+      interval: *time_update
+      health-check:
+        enable: false
+        url: *test_url
+        interval: *time_test
+
+  # 增加自定义服务器
+  proxies:
+  - name: "AIA转发韩国"
+    type: ss
+    server: 1.1.1.1
+    port: 111
+    cipher: rc4-md5
+    password: xxxxxxx
+    udp: true
+  - name: "IPLC转发韩国"
+    type: ss
+    server: 2.2.2.2
+    port: 222
+    cipher: rc4-md5
+    password: xxxxxx
+    udp: true
+  - name: "DLER转发韩国"
+    type: ss
+    server: 3.3.3.3
+    port: 333
+    cipher: rc4-md5
+    password: xxxxxx
+    udp: true
+  - name: SSCustomXXXX
+    type: ss
+    server: a.b.c
+    port: 152
+    cipher: aes-128-gcm
+    password: xxxxx
+    udp: false
+    plugin: obfs
+    plugin-opts:
+      mode: tls
+      host: msn.windows.com
+
+  proxy-groups:
+  - name: "🇰🇷 Korea自建"
+    type: select
+    proxies:
+      - AIA转发韩国
+      - IPLC转发韩国
+      - DLER转发韩国
+      - SSCustomXXXX
+      
+  - name: "🇭🇰 Hong Kong"
+    type: select
+    use:
+    - HK
+    
+  - name: "🇺🇳 Server"
+    type: select
+    use:
+    - UN
+  
+  - name: "🇰🇷 Korea"
+    type: select
+    use:
+    - KR
+  
+  - name: "Game"
+    type: select
+    use:
+    - Game
+  
+  - name: NCGame
+    type: select
+    proxies:
+      - 🇰🇷 Korea自建
+      - 🇰🇷 Korea
+      - Game
+      - 🇭🇰 Hong Kong
+      - 🇺🇳 Server
+  
+  - name: Proxy
+    type: select
+    proxies:
+    - Auto - UrlTest
+    - DIRECT
+    - 🇭🇰 Hong Kong
+    - 🇺🇳 Server
+    - 🇰🇷 Korea
+  - name: Domestic
+    type: select
+    proxies:
+    - DIRECT
+    - Proxy
+  - name: Others
+    type: select
+    proxies:
+    - Proxy
+    - DIRECT
+    - Domestic
+  - name: AdBlock
+    type: select
+    proxies:
+    - REJECT
+    - DIRECT
+    - Proxy
+  - name: Apple
+    type: select
+    proxies:
+    - DIRECT
+    - Proxy
+  - name: AsianTV
+    type: select
+    proxies:
+    - DIRECT
+    - Domestic
+    - Proxy
+    - 🇭🇰 Hong Kong
+    - 🇺🇳 Server
+    - 🇰🇷 Korea
+  - name: GlobalTV
+    type: select
+    proxies:
+    - Proxy
+    - DIRECT
+    - 🇭🇰 Hong Kong
+    - 🇺🇳 Server
+    - 🇰🇷 Korea
+  - name: Netflix
+    type: select
+    proxies:
+    - Proxy
+    - DIRECT
+    - 🇭🇰 Hong Kong
+    - 🇺🇳 Server
+    - 🇰🇷 Korea
+  - name: Spotify
+    type: select
+    proxies:
+    - Proxy
+    - DIRECT
+    - 🇭🇰 Hong Kong
+    - 🇺🇳 Server
+    - 🇰🇷 Korea
+  - name: YouTube
+    type: select
+    proxies:
+    - Proxy
+    - DIRECT
+    - 🇭🇰 Hong Kong
+    - 🇺🇳 Server
+    - 🇰🇷 Korea
+  - name: Telegram
+    type: select
+    proxies:
+    - Proxy
+    - DIRECT
+    - 🇭🇰 Hong Kong
+    - 🇺🇳 Server
+    - 🇰🇷 Korea
+  - name: Steam
+    type: select
+    proxies:
+    - Proxy
+    - DIRECT
+    - 🇭🇰 Hong Kong
+    - 🇺🇳 Server
+    - 🇰🇷 Korea
+  - name: Speedtest
+    type: select
+    proxies:
+    - Proxy
+    - DIRECT
+    - Domestic
+    - 🇭🇰 Hong Kong
+    - 🇺🇳 Server
+    - 🇰🇷 Korea
+  - name: PayPal
+    type: select
+    proxies:
+    - DIRECT
+    - Proxy
+    - Domestic
+    - 🇭🇰 Hong Kong
+    - 🇺🇳 Server
+    - 🇰🇷 Korea
+  - name: Microsoft
+    type: select
+    proxies:
+    - Proxy
+    - DIRECT
+    - 🇭🇰 Hong Kong
+    - 🇺🇳 Server
+    - 🇰🇷 Korea
+  - name: Auto - UrlTest
+    type: url-test
+    use:
+      - UN
+    url: *test_url
+    interval: *time_auto_select
+  
+  rule-providers:
+    Reject:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Reject.yaml
+      path: ./rule_provider/Reject
+      interval: *time_update_rule
+    Special:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Special.yaml
+      path: ./rule_provider/Special
+      interval: *time_update_rule
+    Netflix:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Netflix.yaml
+      path: ./rule_provider/Netflix
+      interval: *time_update_rule
+    Spotify:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Spotify.yaml
+      path: ./rule_provider/Spotify
+      interval: *time_update_rule
+    YouTube:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/YouTube.yaml
+      path: ./rule_provider/YouTube
+      interval: *time_update_rule
+    Bilibili:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Bilibili.yaml
+      path: ./rule_provider/Bilibili
+      interval: *time_update_rule
+    iQiyi:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/iQiyi.yaml
+      path: ./rule_provider/iQiyi
+      interval: *time_update_rule
+    Letv:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Letv.yaml
+      path: ./rule_provider/Letv
+      interval: *time_update_rule
+    Netease Music:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Netease%20Music.yaml
+      path: ./rule_provider/Netease_Music
+      interval: *time_update_rule
+    Tencent Video:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Tencent%20Video.yaml
+      path: ./rule_provider/Tencent_Video
+      interval: *time_update_rule
+    Youku:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Youku.yaml
+      path: ./rule_provider/Youku
+      interval: *time_update_rule
+    ABC:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/ABC.yaml
+      path: ./rule_provider/ABC
+      interval: *time_update_rule
+    Abema TV:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Abema%20TV.yaml
+      path: ./rule_provider/Abema_TV
+      interval: *time_update_rule
+    Amazon:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Amazon.yaml
+      path: ./rule_provider/Amazon
+      interval: *time_update_rule
+    Apple News:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Apple%20News.yaml
+      path: ./rule_provider/Apple_News
+      interval: *time_update_rule
+    Apple TV:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Apple%20TV.yaml
+      path: ./rule_provider/Apple_TV
+      interval: *time_update_rule
+    Bahamut:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Bahamut.yaml
+      path: ./rule_provider/Bahamut
+      interval: *time_update_rule
+    BBC iPlayer:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/BBC%20iPlayer.yaml
+      path: ./rule_provider/BBC_iPlayer
+      interval: *time_update_rule
+    DAZN:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/DAZN.yaml
+      path: ./rule_provider/DAZN
+      interval: *time_update_rule
+    Disney Plus:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Disney%20Plus.yaml
+      path: ./rule_provider/Disney_Plus
+      interval: *time_update_rule
+    encoreTVB:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/encoreTVB.yaml
+      path: ./rule_provider/encoreTVB
+      interval: *time_update_rule
+    Fox Now:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Fox%20Now.yaml
+      path: ./rule_provider/Fox_Now
+      interval: *time_update_rule
+    Fox+:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Fox%2B.yaml
+      path: ./rule_provider/Fox+
+      interval: *time_update_rule
+    HBO:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/HBO.yaml
+      path: ./rule_provider/HBO
+      interval: *time_update_rule
+    Hulu Japan:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Hulu%20Japan.yaml
+      path: ./rule_provider/Hulu_Japan
+      interval: *time_update_rule
+    Hulu:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Hulu.yaml
+      path: ./rule_provider/Hulu
+      interval: *time_update_rule
+    Japonx:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Japonx.yaml
+      path: ./rule_provider/Japonx
+      interval: *time_update_rule
+    JOOX:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/JOOX.yaml
+      path: ./rule_provider/JOOX
+      interval: *time_update_rule
+    KKBOX:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/KKBOX.yaml
+      path: ./rule_provider/KKBOX
+      interval: *time_update_rule
+    KKTV:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/KKTV.yaml
+      path: ./rule_provider/KKTV
+      interval: *time_update_rule
+    Line TV:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Line%20TV.yaml
+      path: ./rule_provider/Line_TV
+      interval: *time_update_rule
+    myTV SUPER:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/myTV%20SUPER.yaml
+      path: ./rule_provider/myTV_SUPER
+      interval: *time_update_rule
+    Pandora:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Pandora.yaml
+      path: ./rule_provider/Pandora
+      interval: *time_update_rule
+    PBS:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/PBS.yaml
+      path: ./rule_provider/PBS
+      interval: *time_update_rule
+    Pornhub:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Pornhub.yaml
+      path: ./rule_provider/Pornhub
+      interval: *time_update_rule
+    Soundcloud:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/Soundcloud.yaml
+      path: ./rule_provider/Soundcloud
+      interval: *time_update_rule
+    ViuTV:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Media/ViuTV.yaml
+      path: ./rule_provider/ViuTV
+      interval: *time_update_rule
+    Telegram:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Telegram.yaml
+      path: ./rule_provider/Telegram
+      interval: *time_update_rule
+    Steam:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Steam.yaml
+      path: ./rule_provider/Steam
+      interval: *time_update_rule
+    Speedtest:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Speedtest.yaml
+      path: ./rule_provider/Speedtest
+      interval: *time_update_rule
+    PayPal:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/PayPal.yaml
+      path: ./rule_provider/PayPal
+      interval: *time_update_rule
+    Microsoft:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Microsoft.yaml
+      path: ./rule_provider/Microsoft
+      interval: *time_update_rule
+    PROXY:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Proxy.yaml
+      path: ./rule_provider/Proxy
+      interval: *time_update_rule
+    Domestic:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Domestic.yaml
+      path: ./rule_provider/Domestic
+      interval: *time_update_rule
+    Apple:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Apple.yaml
+      path: ./rule_provider/Apple
+      interval: *time_update_rule
+    Domestic IPs:
+      type: http
+      behavior: ipcidr
+      url: https://git.dler.io/lhie1/Rules/master/Clash/Provider/Domestic%20IPs.yaml
+      path: ./rule_provider/Domestic_IPs
+      interval: *time_update_rule
+  
+  # 自定义
+    Lineage:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/luodaoyi/Rules/master/Lineage.yaml
+      path: ./rule_provider/Lineage.yaml 
+      interval: *time_update_rule
+    Custom:
+      type: http
+      behavior: classical
+      url: https://git.dler.io/luodaoyi/Rules/master/Custom.yaml
+      path: ./rule_provider/Custom.yaml 
+      interval: *time_update_rule
+  
+  rules:
+  ##Custom Rules##
+  ##- DOMAIN-SUFFIX,google.com,Proxy 匹配域名后缀(交由Proxy代理服务器组)
+  ##- DOMAIN-KEYWORD,google,Proxy 匹配域名关键字(交由Proxy代理服务器组)
+  ##- DOMAIN,google.com,Proxy 匹配域名(交由Proxy代理服务器组)
+  ##- DOMAIN-SUFFIX,ad.com,REJECT 匹配域名后缀(拒绝)
+  ##- IP-CIDR,127.0.0.0/8,DIRECT 匹配数据目标IP(直连)
+  ##- SRC-IP-CIDR,192.168.1.201/32,DIRECT 匹配数据发起IP(直连)
+  ##- DST-PORT,80,DIRECT 匹配数据目标端口(直连)
+  ##- SRC-PORT,7777,DIRECT 匹配数据源端口(直连)
+  
+  ##排序在上的规则优先生效,如添加（去除规则前的#号）：
+  ##IP段：192.168.1.2-192.168.1.200 直连
+  ##- SRC-IP-CIDR,192.168.1.2/31,DIRECT
+  ##- SRC-IP-CIDR,192.168.1.4/30,DIRECT
+  ##- SRC-IP-CIDR,192.168.1.8/29,DIRECT
+  ##- SRC-IP-CIDR,192.168.1.16/28,DIRECT
+  ##- SRC-IP-CIDR,192.168.1.32/27,DIRECT
+  ##- SRC-IP-CIDR,192.168.1.64/26,DIRECT
+  ##- SRC-IP-CIDR,192.168.1.128/26,DIRECT
+  ##- SRC-IP-CIDR,192.168.1.192/29,DIRECT
+  ##- SRC-IP-CIDR,192.168.1.200/32,DIRECT
+  
+  
+  ##IP段：192.168.1.202-192.168.1.255 直连
+  ##- SRC-IP-CIDR,192.168.1.202/31,DIRECT
+  ##- SRC-IP-CIDR,192.168.1.204/30,DIRECT
+  ##- SRC-IP-CIDR,192.168.1.208/28,DIRECT
+  ##- SRC-IP-CIDR,192.168.1.224/27,DIRECT
+  
+  ##此时IP为192.168.1.1和192.168.1.201的客户端流量走代理（策略），其余客户端不走代理
+  ##因为Fake-IP模式下，IP地址为192.168.1.1的路由器自身流量可走代理（策略），所以需要排除
+  ##在线IP段转CIDR地址：http://ip2cidr.com
+  ##Custom Rules End##
+  - RULE-SET,Reject,AdBlock
+  - RULE-SET,Special,DIRECT
+  - RULE-SET,Netflix,Netflix
+  - RULE-SET,Spotify,Spotify
+  - RULE-SET,YouTube,YouTube
+  - RULE-SET,Bilibili,AsianTV
+  - RULE-SET,iQiyi,AsianTV
+  - RULE-SET,Letv,AsianTV
+  - RULE-SET,Netease Music,AsianTV
+  - RULE-SET,Tencent Video,AsianTV
+  - RULE-SET,Youku,AsianTV
+  - RULE-SET,ABC,GlobalTV
+  - RULE-SET,Abema TV,GlobalTV
+  - RULE-SET,Amazon,GlobalTV
+  - RULE-SET,Apple News,GlobalTV
+  - RULE-SET,Apple TV,GlobalTV
+  - RULE-SET,Bahamut,GlobalTV
+  - RULE-SET,BBC iPlayer,GlobalTV
+  - RULE-SET,DAZN,GlobalTV
+  - RULE-SET,Disney Plus,GlobalTV
+  - RULE-SET,encoreTVB,GlobalTV
+  - RULE-SET,Fox Now,GlobalTV
+  - RULE-SET,Fox+,GlobalTV
+  - RULE-SET,HBO,GlobalTV
+  - RULE-SET,Hulu Japan,GlobalTV
+  - RULE-SET,Hulu,GlobalTV
+  - RULE-SET,Japonx,GlobalTV
+  - RULE-SET,JOOX,GlobalTV
+  - RULE-SET,KKBOX,GlobalTV
+  - RULE-SET,KKTV,GlobalTV
+  - RULE-SET,Line TV,GlobalTV
+  - RULE-SET,myTV SUPER,GlobalTV
+  - RULE-SET,Pandora,GlobalTV
+  - RULE-SET,PBS,GlobalTV
+  - RULE-SET,Pornhub,GlobalTV
+  - RULE-SET,Soundcloud,GlobalTV
+  - RULE-SET,ViuTV,GlobalTV
+  - RULE-SET,Telegram,Telegram
+  - RULE-SET,Steam,Steam
+  - RULE-SET,Speedtest,Speedtest
+  - RULE-SET,PayPal,PayPal
+  - RULE-SET,Microsoft,Microsoft
+  - RULE-SET,PROXY,Proxy
+  - RULE-SET,Apple,Apple
+  - RULE-SET,Domestic,Domestic
+  - RULE-SET,Domestic IPs,Domestic
+  # 自定义Rule使用
+  - RULE-SET,Lineage,NCGame
+  - RULE-SET,Custom,Proxy
+  
+  - IP-CIDR,198.18.0.1/16,REJECT,no-resolve
+  - DOMAIN-KEYWORD,tracker,DIRECT
+  - DOMAIN-KEYWORD,announce_peer,DIRECT
+  - DOMAIN-KEYWORD,BitTorrent,DIRECT
+  - DOMAIN-KEYWORD,find_node,DIRECT
+  - DOMAIN-KEYWORD,get_peers,DIRECT
+  - DOMAIN-KEYWORD,info_hash,DIRECT
+  - DOMAIN-KEYWORD,peer_id=,DIRECT
+  - DOMAIN-KEYWORD,torrent,DIRECT
+  - DOMAIN-KEYWORD,announce.php?passkey=,DIRECT
+  - GEOIP,CN,Domestic
+   
+  ##Custom Rules 2##
+  ##- DOMAIN-SUFFIX,google.com,Proxy 匹配域名后缀(交由Proxy代理服务器组)
+  ##- DOMAIN-KEYWORD,google,Proxy 匹配域名关键字(交由Proxy代理服务器组)
+  ##- DOMAIN,google.com,Proxy 匹配域名(交由Proxy代理服务器组)
+  ##- DOMAIN-SUFFIX,ad.com,REJECT 匹配域名后缀(拒绝)
+  ##- IP-CIDR,127.0.0.0/8,DIRECT 匹配数据目标IP(直连)
+  ##- SRC-IP-CIDR,192.168.1.201/32,DIRECT 匹配数据发起IP(直连)
+  ##- DST-PORT,80,DIRECT 匹配数据目标端口(直连)
+  ##- SRC-PORT,7777,DIRECT 匹配数据源端口(直连)
+  ##Custom Rules 2 End##
+  - MATCH,DIRECT
+  
