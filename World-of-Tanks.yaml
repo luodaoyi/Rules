@@ -1,8 +1,11 @@
 payload:
     # > World of Tanks-Asia 坦克世界-亚服
     - DOMAIN-SUFFIX,worldoftanks.asia
+    - DOMAIN-SUFFIX,worldoftanks.com
+    - DOMAIN-SUFFIX,worldoftanks.eu
     - DOMAIN-SUFFIX,wargaming.net
     - DOMAIN-SUFFIX,wgcdn.co
+    - DOMAIN-SUFFIX,tanksmod.com
     - IP-CIDR,46.105.185.0/24
     - IP-CIDR,64.94.253.0/24
     - IP-CIDR,70.42.196.0/24
