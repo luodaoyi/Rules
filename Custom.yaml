@@ -76,3 +76,4 @@ payload:
     - DOMAIN-SUFFIX,pypi.org 
     - DOMAIN-SUFFIX,xposed.info
     - DOMAIN-SUFFIX,dlercloud.com
+    - DOMAIN-SUFFIX,anydesk.com
