@@ -1,6 +1,5 @@
 payload:
     # > Custom Domain 自定义代理域名
-    - DOMAIN-SUFFIX,plaync.com
     - DOMAIN-SUFFIX,gameguardian.net
     - DOMAIN-SUFFIX,kimsufi.com
     - DOMAIN-SUFFIX,maying.co
@@ -77,3 +76,4 @@ payload:
     - DOMAIN-SUFFIX,xposed.info
     - DOMAIN-SUFFIX,dlercloud.com
     - DOMAIN-SUFFIX,anydesk.com
+    - DOMAIN-SUFFIX,dwnews.com
