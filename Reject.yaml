@@ -1,0 +1,7 @@
+payload:
+  # > Custom Reject 自定义禁止规则
+  # 屏蔽抖音
+  - DOMAIN-SUFFIX,ixigua.com
+  - DOMAIN-SUFFIX,snssdk.com
+  - DOMAIN-SUFFIX,amemv.com 
+  - DOMAIN-SUFFIX,toutiao.com
